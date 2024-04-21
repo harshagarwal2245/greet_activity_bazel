@@ -32,7 +32,7 @@ jobs:
       - name: Get apk path
         id: get_apk
         run: |
-            apk_path=$(find -name 'app.apk' type -f)
+            apk_path=$(find -name 'app.apk' -type f)
             echo "::set-output-name=apk_path::${apk_path}"
       
       - name: Upload Assets
