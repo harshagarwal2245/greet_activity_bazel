@@ -32,8 +32,8 @@ jobs:
       - name: Get apk path
         id: get_apk
         run: |
-            apk_path=$(find -name '*.apk' -type f)
-            echo "::set-output-name=apk_path::${apk_path}"
+            apk_path=$(find bazel-bin -name '*.apk' -type f)
+            ls
       
       - name: Upload Assets
         id: upload_assets
