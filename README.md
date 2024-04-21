@@ -1,1 +1,1 @@
-This is a barebones Android app for the [Bazel Android tutorial](https://bazel.build/start/android-app).
+This is simple app to use bazel build system with github actions
