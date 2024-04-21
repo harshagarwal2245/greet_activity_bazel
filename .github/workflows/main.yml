@@ -20,18 +20,26 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN  }}
         with:
           tag_name: v1.0.0
           release_name: Release v1.0.0
           body: |
             Release notes for v1.0.0
             - Feature 1: initial working app
+            
+      - name: Get apk path
+        id: get_apk
+        run: |
+            apk_path=$(find -name 'app.apk' type -f)
+            echo "::set-output-name=apk_path::${apk_path}"
       
       - name: Upload Assets
         id: upload_assets
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-artifact@v2
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./bazel-bin/src/main/
-          asset_name: app.apk
-          asset_content_type: application/vnd.android.package-archive
+          name: app-apk
+          path: ${{ steps.get_apk.outputs.apk_path }}
+          
+          
